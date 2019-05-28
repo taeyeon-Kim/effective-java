@@ -58,6 +58,29 @@ public enum Singleton3 {
 ```
  - 직렬화/역직렬화 할 때 코딩으로 문제를 해결할 필요도 없고, 리플렉션으로 호출되는 문제도 고민할 필요없는 Enum 방법이다.
  - 최선의 방법이지만 이 방법은 다른 상위 클래스를 상속할 수 없다.(interface는 구현 가능)
+ 
+
+### Initialization on demand holder idiom
+ ```java
+public class InitializationOnDemandHolderIdiom {
+	
+	private InitializationOnDemandHolderIdiom () {}
+	
+	private static class Singleton {
+		private static final InitializationOnDemandHolderIdiom instance = new InitializationOnDemandHolderIdiom();
+	}
+	
+	public static InitializationOnDemandHolderIdiom getInstance () {
+		System.out.println("create instance");
+		return Singleton.instance;
+	}
+}
+ ```
+미국 메릴랜드 대학의 컴퓨터 과학 연구원인 Bill pugh 가 기존의 java singleton pattern이 가지고 있는 문제들을 해결 하기 위해 새로운 singleton pattern을 제시하였다. 
+Initialization on demand holder idiom기법이다. 
+이것은 jvm 의 class loader의 매커니즘과 class의 load 시점을 이용하여 내부 class를 생성시킴으로 thread 간의 동기화 문제를 해결한다.
+initialization on demand holder idiom 역시 lazy initialization이 가능하며 모든 java 버젼과, jvm에서 사용이 가능하다. 
+현재 java 에서 singleton 을 생성시킨다고 하면 거의 위의 방법을 사용한다고 보면 된다.
 
 
 #### 결론: Spring bean은 default가 싱글톤이다. 하지만 전체 application에서 싱글톤이 아니라 ApplcationContext안에서 싱글톤이다.
