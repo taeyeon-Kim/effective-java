@@ -4,7 +4,7 @@
 
 #### 배열(공변) vs 제네릭 타입(불공변)
  - Sub가 Super의 하위 타입이라면, 배열 Sub[]는 배열 Super[]의 하위 타입이 된다.
- - 서로 다른 타입 Type1과 Type2가 있을 때, List<Type1>은 List<Type2>의 하위 타입도 아니고 상위 타입도 아니다.
+ - 서로 다른 타입 Type1과 Type2가 있을 때, `List<Type1`>은 `List<Type2>`의 하위 타입도 아니고 상위 타입도 아니다.
 
 ```java
 Object[] ObjectArray = new Long[1];
